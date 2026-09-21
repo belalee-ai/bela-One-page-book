@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="324" viewBox="0 0 800 324" role="img" aria-labelledby="title desc">
+<title id="title">一页读书：选书、整理、开始读</title>
+<desc id="desc">安装 Skill 并上传书籍；助手检查文件、分章整理并核对出处，交付网页和文字版；选择书籍和风格，开始或继续阅读，分别标记导览和原书读完。缺工具或文件读不到时，说明补工具、换文字版或先整理可读部分的办法。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 2 L8 5 L2 8" fill="none" stroke="#73867b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect width="800" height="324" rx="22" fill="#faf8f3"/>
+<g font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" fill="#293b34">
+<rect x="20" y="24" width="236" height="226" rx="18" fill="#e9eee5"/>
+<rect x="282" y="24" width="236" height="226" rx="18" fill="#efe6df"/>
+<rect x="544" y="24" width="236" height="226" rx="18" fill="#e7ebee"/>
+<g font-size="13" letter-spacing="1" fill="#586e60"><text x="40" y="54">01 / 你来选书</text><text x="302" y="54" fill="#806555">02 / 助手整理</text><text x="564" y="54" fill="#5d6e7c">03 / 按兴趣读</text></g>
+<g font-size="24" font-weight="600"><text x="40" y="91">把书放进来</text><text x="302" y="91">先看懂这本书</text><text x="564" y="91">从一页开始</text></g>
+<g fill="none" stroke-width="1" opacity=".35"><path d="M40 112 Q133 110 236 113" stroke="#708471"/><path d="M302 112 Q395 114 498 111" stroke="#94705a"/><path d="M564 112 Q657 111 756 113" stroke="#6b7f8f"/></g>
+<g font-size="16"><text x="40" y="145">安装一次，再上传书籍</text><text x="40" y="177">多本书，就选一本先开始</text><text x="40" y="220" font-size="13" fill="#526755">PDF · EPUB · TXT · MD</text>
+<text x="302" y="145">检查文件，分章阅读</text><text x="302" y="177">梗概 · 脑图 · 短句 · 路线</text><text x="302" y="220" font-size="13" fill="#785f50">核对出处 → 网页 + 文字版</text>
+<text x="564" y="145">选书和风格，开始或继续</text><text x="564" y="177">导览、原书分开标记读完</text><text x="564" y="220" font-size="13" fill="#546976">不必一口气读完</text></g>
+<g fill="none" stroke="#73867b" stroke-width="1.8" stroke-linecap="round" marker-end="url(#arrow)"><path d="M259 132 Q269 127 279 132"/><path d="M521 132 Q531 127 541 132"/></g>
+<circle cx="34" cy="282" r="4" fill="#a18b71"/>
+<text x="48" y="287" font-size="14" fill="#6d6a60">遇到读不了的文件，助手会说明：补工具、换文字版，或先整理可读部分。</text>
+</g></svg>
