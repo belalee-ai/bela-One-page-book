@@ -173,3 +173,20 @@ Windows、Linux、macOS 的基础自动检查已通过，包含环境检测、�
 当前便携模板的浏览器视觉验收、真实 MOBI 和真实厚书完整流程仍待补充。原型截图不能代替这些检查。[测试状态](TESTING.md) 里会保留具体范围。
 
 书籍由你选择的助手处理，遵循该助手的数据规则；成品网页本身没有上传正文或调用模型的代码。分享这个 Skill 不需要附上你的私人书籍、阅读记录或账号信息。
+
+
+## 声明与致谢
+
+做一页读书的过程中，我调用和参考了其他创作者分享的 Skill，也借鉴了现成工具和素材。这个项目是我围绕“厚书读不完，怎么先看懂、再继续读”这个需求，把这些能力放到一起，反复试用和调整后整理出来的。
+
+感谢这些项目和背后的创作者：
+
+- [Hallmark](https://github.com/nutlope/hallmark)：帮助我调整文字层级与页面排版。
+- [Apple Design（emilkowalski/skills）](https://github.com/emilkowalski/skills)：用于思考和检查界面的动效、连续性与减少动态效果。
+- [Humanizer-zh](https://github.com/op7418/humanizer-zh)：帮助我把说明写得更自然，也感谢它所借鉴的 Humanizer 等上游项目。
+- **Design Taste、Product Design Audit 和 skill-creator**：分别用于版面判断、界面检查，以及 Skill 的整理和封装。这里保留实际使用的名称；没有核实到公开来源的本地版本，暂不标注具体作者或猜测链接。
+- [Koboyo Icons](https://koboyo.com/icons)：本地原型使用了其中的阅读人物素材，截图中的相关图形来自这里。
+
+设计过程中，我也参考了 [AntV Infographic](https://github.com/antvis/Infographic) 的信息图思路，以及 [Ian Xiaohei Illustrations](https://github.com/helloianneo/ian-xiaohei-illustrations) 的手绘插画方法。它们在这里属于参考来源，不表示当前分享包已经接入了这些项目的全部功能。
+
+这些致谢记录的是制作过程中的帮助，不代表每次生成都会自动调用所有外部 Skill。相关 Skill 和素材的权利仍归原作者，使用时应遵守各自的许可；本项目的整理、改动和说明由我负责。谢谢愿意把方法和作品分享出来的人，也希望这份整理能帮你更轻松地开始读一本书。
