@@ -18,3 +18,5 @@
 - [如何测试](references/acceptance.md)
 
 生成由宿主助手完成，成品 HTML 可以独立打开。支持五主题、手绘结构图、多书选择、阅读状态及备份。网页不自带 AI 服务，也不是原书翻页器。0.1 为试用版本，不含私人书籍、第三方插画库或用户数据。
+
+三系统基础生成自动检查已通过：[Windows / Linux / macOS 运行记录](https://github.com/belalee-ai/bela-One-page-book/actions/runs/35559536928)。浏览器视觉与真实 MOBI 仍待人工验收。
