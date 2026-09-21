@@ -157,6 +157,10 @@ def publish(books,out):
     write_json(out/'books.json',books)
 
 def main():
+    # Redirected Windows consoles may otherwise reject Chinese status messages.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, 'reconfigure'):
+            stream.reconfigure(encoding='utf-8', errors='backslashreplace')
     p=argparse.ArgumentParser(description=__doc__); sub=p.add_subparsers(dest='cmd',required=True)
     sub.add_parser('preflight')
     ex=sub.add_parser('extract'); ex.add_argument('files',nargs='+'); ex.add_argument('--out',required=True)
