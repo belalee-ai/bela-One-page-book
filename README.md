@@ -27,9 +27,9 @@ https://github.com/belalee-ai/bela-One-page-book
 npx skills add belalee-ai/bela-One-page-book --skill bela-one-page-book --global
 ```
 
-已提供 [Claude Code、Cursor、Codex 的专用命令，以及 WorkBuddy 的安装请求和入口](INSTALL.md)。命令使用 [Vercel 的 Skills 安装工具](https://github.com/vercel-labs/skills)，需要 Node.js/npm、Git 和仓库访问权限；能安装不等于每款工具都已通过完整生成实测。
+已提供 [Claude Code、Cursor、Codex 的专用命令，以及 WorkBuddy 的安装请求和入口](INSTALL.md)。命令使用 [Vercel 的 Skills 安装工具](https://github.com/vercel-labs/skills)，需要 Node.js/npm、Git 和可用网络；能安装不等于每款工具都已通过完整生成实测。
 
-**目前仓库为私有。** 只有获授权的 GitHub 账号能下载或安装；没有权限时先联系仓库作者。给别人一个链接不会自动授予访问权限。
+**仓库已公开。** 可以直接查看、下载或按上面的指令安装，无需向作者申请 GitHub 访问权限。
 
 ## 推荐用什么打开
 
