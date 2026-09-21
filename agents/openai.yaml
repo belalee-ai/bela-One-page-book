@@ -1,0 +1,6 @@
+interface:
+  display_name: "bela-One-page-book · 一页读书"
+  short_description: "把厚书变成有出处的梗概、脑图和五主题阅读网页，支持环境检测与降级"
+  default_prompt: "使用 $bela-one-page-book，把我提供的书做成一页读书，先检查文件和环境，再生成有出处的梗概与网页。"
+policy:
+  allow_implicit_invocation: true
