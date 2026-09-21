@@ -10,31 +10,106 @@
       "file": "theme-matisse.jpg",
       "theme": "matisse",
       "label": "马蒂斯",
+      "section": "首屏",
       "url": "http://127.0.0.1:8876/?theme=matisse#main"
+    },
+    {
+      "file": "theme-matisse-map.jpg",
+      "theme": "matisse",
+      "label": "马蒂斯",
+      "section": "从感兴趣的问题读起",
+      "url": "http://127.0.0.1:8876/?theme=matisse#map"
+    },
+    {
+      "file": "theme-matisse-quotes.jpg",
+      "theme": "matisse",
+      "label": "马蒂斯",
+      "section": "值得回看的八句话",
+      "url": "http://127.0.0.1:8876/?theme=matisse#quotes"
     },
     {
       "file": "theme-morandi.jpg",
       "theme": "morandi",
       "label": "莫兰迪",
+      "section": "首屏",
       "url": "http://127.0.0.1:8876/?theme=morandi#main"
+    },
+    {
+      "file": "theme-morandi-map.jpg",
+      "theme": "morandi",
+      "label": "莫兰迪",
+      "section": "从感兴趣的问题读起",
+      "url": "http://127.0.0.1:8876/?theme=morandi#map"
+    },
+    {
+      "file": "theme-morandi-quotes.jpg",
+      "theme": "morandi",
+      "label": "莫兰迪",
+      "section": "值得回看的八句话",
+      "url": "http://127.0.0.1:8876/?theme=morandi#quotes"
     },
     {
       "file": "theme-vintage.jpg",
       "theme": "vintage",
       "label": "旧书纸张",
+      "section": "首屏",
       "url": "http://127.0.0.1:8876/?theme=vintage#main"
+    },
+    {
+      "file": "theme-vintage-map.jpg",
+      "theme": "vintage",
+      "label": "旧书纸张",
+      "section": "从感兴趣的问题读起",
+      "url": "http://127.0.0.1:8876/?theme=vintage#map"
+    },
+    {
+      "file": "theme-vintage-quotes.jpg",
+      "theme": "vintage",
+      "label": "旧书纸张",
+      "section": "值得回看的八句话",
+      "url": "http://127.0.0.1:8876/?theme=vintage#quotes"
     },
     {
       "file": "theme-swiss.jpg",
       "theme": "swiss",
       "label": "瑞士极简",
+      "section": "首屏",
       "url": "http://127.0.0.1:8876/?theme=swiss#main"
+    },
+    {
+      "file": "theme-swiss-map.jpg",
+      "theme": "swiss",
+      "label": "瑞士极简",
+      "section": "从感兴趣的问题读起",
+      "url": "http://127.0.0.1:8876/?theme=swiss#map"
+    },
+    {
+      "file": "theme-swiss-quotes.jpg",
+      "theme": "swiss",
+      "label": "瑞士极简",
+      "section": "值得回看的八句话",
+      "url": "http://127.0.0.1:8876/?theme=swiss#quotes"
     },
     {
       "file": "theme-night.jpg",
       "theme": "night",
       "label": "夜读／深色书房",
+      "section": "首屏",
       "url": "http://127.0.0.1:8876/?theme=night#main"
+    },
+    {
+      "file": "theme-night-map.jpg",
+      "theme": "night",
+      "label": "夜读／深色书房",
+      "section": "从感兴趣的问题读起",
+      "url": "http://127.0.0.1:8876/?theme=night#map"
+    },
+    {
+      "file": "theme-night-quotes.jpg",
+      "theme": "night",
+      "label": "夜读／深色书房",
+      "section": "值得回看的八句话",
+      "url": "http://127.0.0.1:8876/?theme=night#quotes"
     }
   ]
 }

@@ -6,37 +6,87 @@
 
 ## 五种风格对比
 
-以下五张是本次重新截取的首页，内容和尺寸一致，均为 1280 × 720。图中“深色书房”对应分享版中的“夜读”。
+每种三张，共 15 张，分别展示首屏、问题脑图和八句话。均为 1280 × 720；各主题使用同一部分内容，方便比较。图中“深色书房”对应分享版里的“夜读”。
 
 ### 马蒂斯
 
-奶油纸色与明亮蓝色。
+蓝、黄、粉色短句卡片与彩色主题标签。
 
-![马蒂斯，同一首页的原型截图](images/theme-matisse.jpg)
+**首屏**
+
+![马蒂斯 · 首屏](images/theme-matisse.jpg)
+
+**从感兴趣的问题读起**
+
+![马蒂斯 · 从感兴趣的问题读起](images/theme-matisse-map.jpg)
+
+**值得回看的八句话**
+
+![马蒂斯 · 值得回看的八句话](images/theme-matisse-quotes.jpg)
 
 ### 莫兰迪
 
-灰米色与灰绿色。
+灰绿与灰粉的柔和卡片。
 
-![莫兰迪，同一首页的原型截图](images/theme-morandi.jpg)
+**首屏**
+
+![莫兰迪 · 首屏](images/theme-morandi.jpg)
+
+**从感兴趣的问题读起**
+
+![莫兰迪 · 从感兴趣的问题读起](images/theme-morandi-map.jpg)
+
+**值得回看的八句话**
+
+![莫兰迪 · 值得回看的八句话](images/theme-morandi-quotes.jpg)
 
 ### 旧书纸张
 
-暖纸色与棕色。
+暖色纸张、棕色正文与双线边框。
 
-![旧书纸张，同一首页的原型截图](images/theme-vintage.jpg)
+**首屏**
+
+![旧书纸张 · 首屏](images/theme-vintage.jpg)
+
+**从感兴趣的问题读起**
+
+![旧书纸张 · 从感兴趣的问题读起](images/theme-vintage-map.jpg)
+
+**值得回看的八句话**
+
+![旧书纸张 · 值得回看的八句话](images/theme-vintage-quotes.jpg)
 
 ### 瑞士极简
 
-米白底、黑字与红色重点。
+红色重点、清楚的黑字与分隔线。
 
-![瑞士极简，同一首页的原型截图](images/theme-swiss.jpg)
+**首屏**
+
+![瑞士极简 · 首屏](images/theme-swiss.jpg)
+
+**从感兴趣的问题读起**
+
+![瑞士极简 · 从感兴趣的问题读起](images/theme-swiss-map.jpg)
+
+**值得回看的八句话**
+
+![瑞士极简 · 值得回看的八句话](images/theme-swiss-quotes.jpg)
 
 ### 夜读／深色书房
 
-深灰蓝背景与暖色文字。
+深色卡片、暖白正文和暖金色重点。
 
-![夜读／深色书房，同一首页的原型截图](images/theme-night.jpg)
+**首屏**
+
+![夜读／深色书房 · 首屏](images/theme-night.jpg)
+
+**从感兴趣的问题读起**
+
+![夜读／深色书房 · 从感兴趣的问题读起](images/theme-night-map.jpg)
+
+**值得回看的八句话**
+
+![夜读／深色书房 · 值得回看的八句话](images/theme-night-quotes.jpg)
 
 ## 书架与阅读状态
 

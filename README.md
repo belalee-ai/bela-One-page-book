@@ -40,21 +40,57 @@
 
 ### 五种风格实际截图
 
-下面是当前本地原型同一页面的五主题截图，均为 1280 × 720，方便比较颜色和文字观感。**截图含原型人物插画，便携分享版不保证同样布局和插画。**
+每种风格三张：**首屏、问题脑图、八句话**，共 15 张。除了首页，也可以直接比较正文、卡片和标签的配色。截图均为当前本地原型的 1280 × 720 实际画面；**便携分享版不保证相同布局和人物插画**。
 
-<table>
-<tr>
-<td><strong>马蒂斯</strong><br><a href="docs/images/theme-matisse.jpg"><img src="docs/images/theme-matisse.jpg" alt="马蒂斯主题，本地原型实际截图" width="420"></a></td>
-<td><strong>莫兰迪</strong><br><a href="docs/images/theme-morandi.jpg"><img src="docs/images/theme-morandi.jpg" alt="莫兰迪主题，本地原型实际截图" width="420"></a></td>
-</tr>
-<tr>
-<td><strong>旧书纸张</strong><br><a href="docs/images/theme-vintage.jpg"><img src="docs/images/theme-vintage.jpg" alt="旧书纸张主题，本地原型实际截图" width="420"></a></td>
-<td><strong>瑞士极简</strong><br><a href="docs/images/theme-swiss.jpg"><img src="docs/images/theme-swiss.jpg" alt="瑞士极简主题，本地原型实际截图" width="420"></a></td>
-</tr>
-<tr>
-<td><strong>夜读／深色书房</strong><br><a href="docs/images/theme-night.jpg"><img src="docs/images/theme-night.jpg" alt="夜读／深色书房主题，本地原型实际截图" width="420"></a></td>
-</tr>
-</table>
+#### 马蒂斯
+
+蓝、黄、粉色短句卡片与彩色主题标签。
+
+<table><tr>
+<td>首屏<br><a href="docs/images/theme-matisse.jpg"><img src="docs/images/theme-matisse.jpg" alt="马蒂斯 · 首屏，本地原型实际截图" width="280"></a></td>
+<td>从感兴趣的问题读起<br><a href="docs/images/theme-matisse-map.jpg"><img src="docs/images/theme-matisse-map.jpg" alt="马蒂斯 · 从感兴趣的问题读起，本地原型实际截图" width="280"></a></td>
+<td>值得回看的八句话<br><a href="docs/images/theme-matisse-quotes.jpg"><img src="docs/images/theme-matisse-quotes.jpg" alt="马蒂斯 · 值得回看的八句话，本地原型实际截图" width="280"></a></td>
+</tr></table>
+
+#### 莫兰迪
+
+灰绿与灰粉的柔和卡片。
+
+<table><tr>
+<td>首屏<br><a href="docs/images/theme-morandi.jpg"><img src="docs/images/theme-morandi.jpg" alt="莫兰迪 · 首屏，本地原型实际截图" width="280"></a></td>
+<td>从感兴趣的问题读起<br><a href="docs/images/theme-morandi-map.jpg"><img src="docs/images/theme-morandi-map.jpg" alt="莫兰迪 · 从感兴趣的问题读起，本地原型实际截图" width="280"></a></td>
+<td>值得回看的八句话<br><a href="docs/images/theme-morandi-quotes.jpg"><img src="docs/images/theme-morandi-quotes.jpg" alt="莫兰迪 · 值得回看的八句话，本地原型实际截图" width="280"></a></td>
+</tr></table>
+
+#### 旧书纸张
+
+暖色纸张、棕色正文与双线边框。
+
+<table><tr>
+<td>首屏<br><a href="docs/images/theme-vintage.jpg"><img src="docs/images/theme-vintage.jpg" alt="旧书纸张 · 首屏，本地原型实际截图" width="280"></a></td>
+<td>从感兴趣的问题读起<br><a href="docs/images/theme-vintage-map.jpg"><img src="docs/images/theme-vintage-map.jpg" alt="旧书纸张 · 从感兴趣的问题读起，本地原型实际截图" width="280"></a></td>
+<td>值得回看的八句话<br><a href="docs/images/theme-vintage-quotes.jpg"><img src="docs/images/theme-vintage-quotes.jpg" alt="旧书纸张 · 值得回看的八句话，本地原型实际截图" width="280"></a></td>
+</tr></table>
+
+#### 瑞士极简
+
+红色重点、清楚的黑字与分隔线。
+
+<table><tr>
+<td>首屏<br><a href="docs/images/theme-swiss.jpg"><img src="docs/images/theme-swiss.jpg" alt="瑞士极简 · 首屏，本地原型实际截图" width="280"></a></td>
+<td>从感兴趣的问题读起<br><a href="docs/images/theme-swiss-map.jpg"><img src="docs/images/theme-swiss-map.jpg" alt="瑞士极简 · 从感兴趣的问题读起，本地原型实际截图" width="280"></a></td>
+<td>值得回看的八句话<br><a href="docs/images/theme-swiss-quotes.jpg"><img src="docs/images/theme-swiss-quotes.jpg" alt="瑞士极简 · 值得回看的八句话，本地原型实际截图" width="280"></a></td>
+</tr></table>
+
+#### 夜读／深色书房
+
+深色卡片、暖白正文和暖金色重点。
+
+<table><tr>
+<td>首屏<br><a href="docs/images/theme-night.jpg"><img src="docs/images/theme-night.jpg" alt="夜读／深色书房 · 首屏，本地原型实际截图" width="280"></a></td>
+<td>从感兴趣的问题读起<br><a href="docs/images/theme-night-map.jpg"><img src="docs/images/theme-night-map.jpg" alt="夜读／深色书房 · 从感兴趣的问题读起，本地原型实际截图" width="280"></a></td>
+<td>值得回看的八句话<br><a href="docs/images/theme-night-quotes.jpg"><img src="docs/images/theme-night-quotes.jpg" alt="夜读／深色书房 · 值得回看的八句话，本地原型实际截图" width="280"></a></td>
+</tr></table>
 
 点击图片可看大图。[全部截图与版本说明](docs/screenshots.md)
 
