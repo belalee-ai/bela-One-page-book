@@ -38,6 +38,26 @@
 
 当前分享版使用同一套响应式版式切换五组主题颜色，并自带手绘结构框。人物插画和更复杂的拼贴属于可选增强，不需要先装插画 Skill 才能使用。
 
+### 五种风格实际截图
+
+下面是当前本地原型同一页面的五主题截图，均为 1280 × 720，方便比较颜色和文字观感。**截图含原型人物插画，便携分享版不保证同样布局和插画。**
+
+<table>
+<tr>
+<td><strong>马蒂斯</strong><br><a href="docs/images/theme-matisse.jpg"><img src="docs/images/theme-matisse.jpg" alt="马蒂斯主题，本地原型实际截图" width="420"></a></td>
+<td><strong>莫兰迪</strong><br><a href="docs/images/theme-morandi.jpg"><img src="docs/images/theme-morandi.jpg" alt="莫兰迪主题，本地原型实际截图" width="420"></a></td>
+</tr>
+<tr>
+<td><strong>旧书纸张</strong><br><a href="docs/images/theme-vintage.jpg"><img src="docs/images/theme-vintage.jpg" alt="旧书纸张主题，本地原型实际截图" width="420"></a></td>
+<td><strong>瑞士极简</strong><br><a href="docs/images/theme-swiss.jpg"><img src="docs/images/theme-swiss.jpg" alt="瑞士极简主题，本地原型实际截图" width="420"></a></td>
+</tr>
+<tr>
+<td><strong>夜读／深色书房</strong><br><a href="docs/images/theme-night.jpg"><img src="docs/images/theme-night.jpg" alt="夜读／深色书房主题，本地原型实际截图" width="420"></a></td>
+</tr>
+</table>
+
+点击图片可看大图。[全部截图与版本说明](docs/screenshots.md)
+
 ## 第一次怎么用
 
 ### 1. 安装整个文件夹

@@ -1,0 +1,40 @@
+{
+  "captured": "2026-09-21",
+  "kind": "local prototype, not portable skill output",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "images": [
+    {
+      "file": "theme-matisse.jpg",
+      "theme": "matisse",
+      "label": "马蒂斯",
+      "url": "http://127.0.0.1:8876/?theme=matisse#main"
+    },
+    {
+      "file": "theme-morandi.jpg",
+      "theme": "morandi",
+      "label": "莫兰迪",
+      "url": "http://127.0.0.1:8876/?theme=morandi#main"
+    },
+    {
+      "file": "theme-vintage.jpg",
+      "theme": "vintage",
+      "label": "旧书纸张",
+      "url": "http://127.0.0.1:8876/?theme=vintage#main"
+    },
+    {
+      "file": "theme-swiss.jpg",
+      "theme": "swiss",
+      "label": "瑞士极简",
+      "url": "http://127.0.0.1:8876/?theme=swiss#main"
+    },
+    {
+      "file": "theme-night.jpg",
+      "theme": "night",
+      "label": "夜读／深色书房",
+      "url": "http://127.0.0.1:8876/?theme=night#main"
+    }
+  ]
+}
