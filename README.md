@@ -16,6 +16,12 @@
 
 [PDF 标注怎么用](docs/pdf-annotations.md) · [0.2 更新与对抗检查](docs/release-0.2.md) · [小红书 REDSkill 候选版](https://github.com/belalee-ai/bela-One-page-book/tree/main/distributions/redskill)
 
+### 在 PDF 里标重点、写笔记
+
+![PDF 原文高亮和笔记面板，显示标注日期与已保存状态](docs/images/pdf-annotation-note.png)
+
+0.2 便携版实际操作截图（2026-09-22，macOS 内置 Chromium）。使用随包的两页原创短文，演示笔记也为公开示例。选中的句子保留高亮，右侧可以记笔记；返回导览后，同一条记录会出现在“我的摘录与笔记”中。
+
 | 使用环境 | 本次验证状态 |
 |---|---|
 | Codex、Claude Code、Cursor | 沿用 Skill 文件和安装入口；本轮检查打包与示例生成，不冒充逐个客户端全流程实测 |
