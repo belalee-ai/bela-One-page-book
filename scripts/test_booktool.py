@@ -21,6 +21,10 @@ def make_epub(path):
         z.writestr('OEBPS/b.xhtml','<html><body><p>乙章正文</p></body></html>')
 
 class Tests(unittest.TestCase):
+    def test_pdf_fixture_fingerprint(self):
+        source=b.read_json(ROOT/'examples/reader/source.json')
+        digest=b.hashlib.sha256((ROOT/'examples/reader/reading-demo.pdf').read_bytes()).hexdigest()
+        self.assertEqual(digest,source['sha256']);self.assertEqual(digest[:24],source['id'])
     def test_epub_spine(self):
         with tempfile.TemporaryDirectory() as d:
             p=Path(d)/'书.epub';make_epub(p);out=b.extract_one(p,d);s=b.read_json(out/'source.json')

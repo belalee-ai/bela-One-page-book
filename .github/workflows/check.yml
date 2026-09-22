@@ -26,6 +26,7 @@ jobs:
       - run: node scripts/test_annotations.cjs
       - run: python scripts/test_reader_server.py
       - run: python scripts/booktool.py render examples/guide.json --source examples/source.json --review examples/review.json --out demo
+      - run: python scripts/booktool.py render examples/reader/guide.json --source examples/reader/source.json --review examples/reader/review.json --out demo-reader
       - run: npm audit --prefix vendor --omit=dev --audit-level=high
       - run: python distributions/redskill/scripts/test_booktool.py
       - run: node distributions/redskill/scripts/test_state.cjs
