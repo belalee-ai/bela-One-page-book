@@ -23,4 +23,10 @@ jobs:
       - run: python scripts/booktool.py preflight
       - run: python scripts/test_booktool.py
       - run: node scripts/test_state.cjs
-      - run: python scripts/booktool.py render examples/guide.json --source examples/source.json --out demo
+      - run: node scripts/test_annotations.cjs
+      - run: python scripts/test_reader_server.py
+      - run: python scripts/booktool.py render examples/guide.json --source examples/source.json --review examples/review.json --out demo
+      - run: npm audit --prefix vendor --omit=dev --audit-level=high
+      - run: python distributions/redskill/scripts/test_booktool.py
+      - run: node distributions/redskill/scripts/test_state.cjs
+      - run: node distributions/redskill/scripts/test_annotations.cjs

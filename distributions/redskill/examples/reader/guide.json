@@ -1,0 +1,133 @@
+{
+  "title": "阅读与书签 · 原创测试",
+  "author": "一页读书 · 原创验收文本",
+  "intro": "两页短文，用于检验阅读器与标注功能，不是真实出版物。",
+  "coverage": "完整覆盖两页原创测试文本。",
+  "scope": "full",
+  "spoilers": false,
+  "synopsis": [
+    {
+      "title": "从一页开始",
+      "text": "原文邀请读者读一页、留一个问题，准备好时再回来。",
+      "units": [
+        1
+      ],
+      "evidence": [
+        {
+          "unit": 1,
+          "text": "Read one page. Keep one question. Return when you are ready."
+        }
+      ]
+    },
+    {
+      "title": "留住位置和想法",
+      "text": "书签记住位置，笔记记住想法。",
+      "units": [
+        2
+      ],
+      "evidence": [
+        {
+          "unit": 2,
+          "text": "A bookmark remembers the place. A note remembers the thought."
+        }
+      ]
+    }
+  ],
+  "map": [
+    {
+      "title": "从一页开始",
+      "text": "原文邀请读者读一页、留一个问题，准备好时再回来。",
+      "units": [
+        1
+      ],
+      "evidence": [
+        {
+          "unit": 1,
+          "text": "Read one page. Keep one question. Return when you are ready."
+        }
+      ]
+    },
+    {
+      "title": "留住位置和想法",
+      "text": "书签记住位置，笔记记住想法。",
+      "units": [
+        2
+      ],
+      "evidence": [
+        {
+          "unit": 2,
+          "text": "A bookmark remembers the place. A note remembers the thought."
+        }
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "title": "从一页开始",
+      "text": "原文邀请读者读一页、留一个问题，准备好时再回来。",
+      "units": [
+        1
+      ],
+      "evidence": [
+        {
+          "unit": 1,
+          "text": "Read one page. Keep one question. Return when you are ready."
+        }
+      ]
+    },
+    {
+      "title": "留住位置和想法",
+      "text": "书签记住位置，笔记记住想法。",
+      "units": [
+        2
+      ],
+      "evidence": [
+        {
+          "unit": 2,
+          "text": "A bookmark remembers the place. A note remembers the thought."
+        }
+      ]
+    }
+  ],
+  "diagrams": [
+    {
+      "title": "阅读与记录",
+      "type": "sequence",
+      "nodes": [
+        {
+          "title": "从一页开始",
+          "text": "原文邀请读者读一页、留一个问题，准备好时再回来。",
+          "units": [
+            1
+          ],
+          "evidence": [
+            {
+              "unit": 1,
+              "text": "Read one page. Keep one question. Return when you are ready."
+            }
+          ]
+        },
+        {
+          "title": "留住位置和想法",
+          "text": "书签记住位置，笔记记住想法。",
+          "units": [
+            2
+          ],
+          "evidence": [
+            {
+              "unit": 2,
+              "text": "A bookmark remembers the place. A note remembers the thought."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "quotes": [
+    {
+      "text": "Read one page. Keep one question. Return when you are ready.",
+      "context": "第一页的阅读邀请。",
+      "unit": 1
+    }
+  ]
+}

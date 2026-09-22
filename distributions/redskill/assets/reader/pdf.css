@@ -1,0 +1,29 @@
+.shelf-library-tools{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:24px}.shelf-library-tools p{margin:0;color:var(--muted);font-size:13px}
+#reading-shelf .shelf-add{background:var(--shelf-accent);border-color:var(--shelf-accent);color:var(--accent-ink,#fff);white-space:nowrap}
+#shelf-search{width:100%;font:inherit;color:var(--ink);background:var(--white);padding:11px 14px;border:1px solid var(--line);border-radius:6px;margin-top:18px;box-sizing:border-box}
+#shelf-upload-status{margin:12px 0 0;font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+#shelf-upload-status:empty{display:none}.shelf-book h3{overflow-wrap:anywhere}
+#pdf-reader{width:calc(100% - 32px);height:calc(100dvh - 32px);max-width:1400px;max-height:calc(100dvh - 32px);padding:0;margin:auto;border:1px solid var(--line);border-radius:14px;background:var(--paper);color:var(--ink);font:14px/1.6 var(--sans);overflow:hidden;box-sizing:border-box}
+#pdf-reader[open]{display:flex;flex-direction:column}
+#pdf-reader::backdrop{background:#1118;backdrop-filter:blur(3px)}
+.pdf-top{display:flex;align-items:center;gap:20px;padding:16px 22px;border-bottom:1px solid var(--line);flex-shrink:0}
+#pdf-reader h2{flex:1;margin:0;font:600 19px/1.5 var(--sans);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+#pdf-reader button{font:inherit;padding:8px 13px;min-height:40px;background:var(--white);color:var(--ink);border:1px solid var(--line);border-radius:6px;white-space:nowrap;cursor:pointer}
+#pdf-reader button:disabled{opacity:.4;cursor:default}#pdf-reader button[aria-pressed="true"]{border-color:var(--accent,var(--blue));color:var(--accent,var(--blue))}
+#pdf-reader :is(button,input):focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.pdf-controls{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--line);flex-shrink:0}
+#pdf-page-form{display:flex;align-items:center;gap:8px;margin:0}#pdf-page{width:65px;font:inherit;padding:7px 5px;border:1px solid var(--line);border-radius:4px;color:var(--ink);background:var(--white);text-align:center}
+#pdf-stage{flex:1;min-height:0;overflow:auto;padding:20px 0;overscroll-behavior:contain}#pdf-message{text-align:center;padding:30px 20px;color:var(--muted)}
+#pdf-paper{width:max-content;margin:0 auto}.pdf-page-surface{position:relative;background:white;box-shadow:0 3px 16px #0002}.pdf-page-surface canvas{display:block}
+.textLayer{--min-font-size:1;--text-scale-factor:calc(var(--total-scale-factor) * var(--min-font-size));--min-font-size-inv:calc(1 / var(--min-font-size));position:absolute;text-align:initial;inset:0;overflow:clip;opacity:1;line-height:1;text-size-adjust:none;forced-color-adjust:none;transform-origin:0 0;caret-color:CanvasText;z-index:0;color-scheme:only light}
+.textLayer :is(span,br){color:transparent;position:absolute;white-space:pre;cursor:text;transform-origin:0% 0%}
+.textLayer > :not(.markedContent),.textLayer .markedContent span:not(.markedContent){z-index:1;--font-height:0;font-size:calc(var(--text-scale-factor) * var(--font-height));--scale-x:1;--rotate:0deg;transform:rotate(var(--rotate)) scaleX(var(--scale-x)) scale(var(--min-font-size-inv))}
+.textLayer .markedContent{display:contents}.textLayer ::selection{background:#86b8ff70}
+@media(max-width:680px){#pdf-reader{width:100%;height:100dvh;max-height:100dvh;border:0;border-radius:0}.pdf-top{padding:12px;gap:10px;flex-wrap:wrap}#pdf-reader h2{order:3;flex-basis:100%;font-size:16px}.pdf-top #pdf-finish{margin-left:auto}.pdf-controls{gap:8px;padding-inline:8px}#pdf-reader .pdf-controls button{font-size:12px;padding-inline:9px}#pdf-page{width:50px}#pdf-page-form{gap:5px;font-size:12px}.shelf-library-tools{align-items:flex-start;flex-wrap:wrap}}
+@media(prefers-reduced-transparency:reduce){#reading-shelf::backdrop,#pdf-reader::backdrop{backdrop-filter:none;background:#111b}}
+@media print{#pdf-reader{display:none!important}}
+#pdf-zoom{font:inherit;padding:9px 8px;min-height:40px;border:1px solid var(--line);border-radius:5px;background:var(--white);color:var(--ink);max-width:135px}
+#pdf-zoom:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+@media(max-width:680px){#pdf-zoom{order:4;font-size:12px;min-height:34px;padding-block:6px}.pdf-controls{row-gap:6px}}
+
+#pdf-reader .pdf-top{max-width:none;margin:0;width:100%;flex-wrap:wrap}#pdf-reader .pdf-top h2{flex-basis:0}#portable-pdf-tools input[hidden]{display:none}@media(max-width:680px){#pdf-reader .pdf-top h2{flex-basis:100%}}

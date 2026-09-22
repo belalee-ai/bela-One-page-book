@@ -1,0 +1,1 @@
+{"name":"bela-reader-vendor-lock","private":true,"version":"0.2.0","description":"PDF vendor provenance only; end users do not need npm install.","dependencies":{"pdfjs-dist":"6.2.108"}}

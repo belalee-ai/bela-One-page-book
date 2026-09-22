@@ -1,0 +1,5 @@
+<dialog id="pdf-reader" aria-labelledby="pdf-title">
+ <header class="pdf-top"><button type="button" id="pdf-back">返回导览</button><h2 id="pdf-title">原书</h2><button type="button" id="pdf-finish" aria-pressed="false">读完了</button></header>
+ <div class="pdf-controls"><button type="button" id="pdf-prev" aria-label="上一页">上一页</button><form id="pdf-page-form"><label for="pdf-page">第</label><input id="pdf-page" type="number" min="1" value="1" aria-label="跳转到 PDF 页序"><span id="pdf-pages">/ — 页</span><button type="submit">跳转</button></form><select id="pdf-zoom" aria-label="PDF 缩放"><option value="1">适合宽度</option><option value="1.5">放大 1.5 倍</option><option value="2">放大 2 倍</option><option value="3">放大 3 倍</option></select><button type="button" id="pdf-next" aria-label="下一页">下一页</button></div>
+ <div id="pdf-stage"><p id="pdf-message" role="status" aria-live="polite">正在打开原书…</p><div id="pdf-paper"></div></div>
+</dialog>

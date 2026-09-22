@@ -1,0 +1,29 @@
+{
+  "version": "0.2",
+  "source_digest": "8d3f40c6f967ec9dffa347f6bba8ad5c490074a0e88ce7f56b0919c0590829a8",
+  "guide_digest": "d4f2381a33aaa5b3ab4e178e0edbf3a12b7f5432c49337c8ebf89f39f1c74ce2",
+  "reading": {
+    "version": "0.2",
+    "source_digest": "8d3f40c6f967ec9dffa347f6bba8ad5c490074a0e88ce7f56b0919c0590829a8",
+    "units": [
+      {
+        "id": 1,
+        "status": "read",
+        "note": "原创验收两章短文已逐字核对：小林把一本厚书放在桌上，每次只读一页。读完一页，也是一段自己的时间。"
+      },
+      {
+        "id": 2,
+        "status": "read",
+        "note": "原创验收两章短文已逐字核对：她在书签上写下一个问题，第二天回来寻找答案。书签不是终点，是下次出发的地方。"
+      }
+    ]
+  },
+  "semantic": {
+    "status": "reviewed",
+    "notes": "本轮回看两章原创文本；关于留时间与写下问题的解释均有依据，没有添加出版物信息。"
+  },
+  "spoiler_check": {
+    "status": "reviewed",
+    "notes": "原创生活片段，没有悬疑结局；不启用剧透门。"
+  }
+}

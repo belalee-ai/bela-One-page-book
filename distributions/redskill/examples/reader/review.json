@@ -1,0 +1,29 @@
+{
+  "version": "0.2",
+  "source_digest": "6c9a09e1b0ce2ba29df9c2c343b4109db485be9f4b1bfd9478d992eec93cbd7e",
+  "guide_digest": "e2c690d683cf79d86da76b92990173175bc8bb1fbd9421ad938d87e3c3245acb",
+  "reading": {
+    "version": "0.2",
+    "source_digest": "6c9a09e1b0ce2ba29df9c2c343b4109db485be9f4b1bfd9478d992eec93cbd7e",
+    "units": [
+      {
+        "id": 1,
+        "status": "read",
+        "note": "Read one page. Keep one question. Return when you are ready."
+      },
+      {
+        "id": 2,
+        "status": "read",
+        "note": "A bookmark remembers the place. A note remembers the thought."
+      }
+    ]
+  },
+  "semantic": {
+    "status": "reviewed",
+    "notes": "仅此固定原创验收样例：第一页对应读一页、留问题、准备好再回来；第二页对应书签记位置、笔记记想法。逐项一致。"
+  },
+  "spoiler_check": {
+    "status": "reviewed",
+    "notes": "两句原创阅读提示，无故事结局。仅适用于此固定测试材料。"
+  }
+}

@@ -107,7 +107,7 @@ MOBI 需要 Calibre，扫描书需要额外文字识别；不必提前装齐所�
 
 ### 哪些已经测试
 
-Windows、macOS、Linux 已通过生成脚本的自动检查；当前便携版的真实桌面浏览器、Safari、手机和平板仍待实测。GitHub 展示图来自原型页面，不能代替便携版验收。详见 [测试结果](TESTING.md)。
+0.1 的 Windows、macOS、Linux 生成脚本自动检查已通过。0.2 已在 macOS 内置 Chromium 实测 PDF 阅读、标注、恢复与备份导入；其他浏览器、手机和平板仍待实测，本轮三系统 CI 以对应提交为准。GitHub 展示图来自原型页面，不能代替便携版验收。详见 [测试结果](TESTING.md)。
 
 ## 遇到问题怎么办
 
@@ -165,4 +165,8 @@ skills/
 
 ## 本次验证范围
 
-已核对仓库根目录的 Skill 结构，以及安装工具文档中的命令与工具标识。三系统的生成脚本检查见 [测试说明](TESTING.md)。本轮未重装作者正在使用的 Skill，也未宣称完成 Claude Code、Cursor 或 WorkBuddy 的安装实测。
+已核对仓库根目录的 Skill 结构，以及安装工具文档中的命令与工具标识。三系统的生成脚本检查见 [测试说明](TESTING.md)。本轮在独立目录解包检查发行包，作者本机 Codex Skill 也同步更新；这不等于已经完成 Claude Code、Cursor 或 WorkBuddy 的客户端加载与完整生成实测。
+
+## 0.2 的 PDF 标注与升级
+
+安装完整 Skill 后，让助手重新生成交付目录。文字导览仍可双击 HTML；想在 PDF 上划线，在交付目录运行 `python start_reader.py`（Windows 也可用 `py -3 start_reader.py`），打开显示的本机地址。保留整个 `reader` 文件夹。0.1 的阅读进度 JSON 可恢复，旧 guide/source 材料需要按新核对契约重新生成。详细步骤见 [PDF 标注说明](docs/pdf-annotations.md)。
