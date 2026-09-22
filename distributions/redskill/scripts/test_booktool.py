@@ -28,14 +28,14 @@ class Tests(unittest.TestCase):
     def test_encoding(self):
         with tempfile.TemporaryDirectory() as d:
             p=Path(d)/'中文.txt';p.write_bytes('这是中文正文。'.encode('gb18030'));out=b.extract_one(p,d)
-            self.assertIn('这是中文正文',(out/'book.md').read_text())
+            self.assertIn('这是中文正文',(out/'book.md').read_text(encoding='utf-8'))
     def test_extract_is_not_reading(self):
         with tempfile.TemporaryDirectory() as d:
-            p=Path(d)/'书.txt';p.write_text('第一章的正文');out=b.extract_one(p,d)
+            p=Path(d)/'书.txt';p.write_text('第一章的正文', encoding='utf-8');out=b.extract_one(p,d)
             self.assertEqual(b.read_json(out/'reading.json')['units'][0]['status'],'unread')
     def test_resume_preserves_ledger(self):
         with tempfile.TemporaryDirectory() as d:
-            p=Path(d)/'书.txt';p.write_text('第一章的正文');out=b.extract_one(p,d);ledger=b.read_json(out/'reading.json')
+            p=Path(d)/'书.txt';p.write_text('第一章的正文', encoding='utf-8');out=b.extract_one(p,d);ledger=b.read_json(out/'reading.json')
             ledger['units'][0].update(status='read',note='已经核对正文');b.write_json(out/'reading.json',ledger)
             b.extract_one(p,d);self.assertEqual(ledger,b.read_json(out/'reading.json'))
     def test_stale_ledger_rejected(self):
@@ -43,8 +43,8 @@ class Tests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'正文已改变'):b.check_reading(ledger,s)
     def test_batch_failure_isolated(self):
         with tempfile.TemporaryDirectory() as d:
-            a=Path(d)/'甲.txt';a.write_text('甲正文');bad=Path(d)/'坏.epub';bad.write_text('坏文件');c=Path(d)/'乙.txt';c.write_text('乙正文')
-            r=subprocess.run([sys.executable,str(ROOT/'scripts/booktool.py'),'extract',str(a),str(bad),str(c),'--out',str(Path(d)/'output')],capture_output=True,text=True)
+            a=Path(d)/'甲.txt';a.write_text('甲正文', encoding='utf-8');bad=Path(d)/'坏.epub';bad.write_text('坏文件', encoding='utf-8');c=Path(d)/'乙.txt';c.write_text('乙正文', encoding='utf-8')
+            r=subprocess.run([sys.executable,str(ROOT/'scripts/booktool.py'),'extract',str(a),str(bad),str(c),'--out',str(Path(d)/'output')],capture_output=True,text=True, encoding='utf-8')
             rows=[json.loads(line) for line in r.stdout.splitlines()]
             self.assertEqual(r.returncode,2);self.assertEqual(len(rows),3);self.assertIn('error',rows[1])
             for i in (0,2):self.assertTrue((Path(rows[i]['output'])/'reading.json').is_file())
@@ -58,7 +58,7 @@ class Tests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'PDF 解析器'):b.extract_one(p,d)
     def test_empty(self):
         with tempfile.TemporaryDirectory() as d:
-            p=Path(d)/'x.txt';p.write_text(' ')
+            p=Path(d)/'x.txt';p.write_text(' ', encoding='utf-8')
             with self.assertRaisesRegex(ValueError,'OCR'):b.extract_one(p,d)
     def test_valid(self):
         g=fixture();self.assertTrue(b.validate(g,SOURCE,reviewed(g,SOURCE)))
@@ -110,7 +110,7 @@ class Tests(unittest.TestCase):
     def test_safe_html(self):
         g=fixture();g['title']='</script><img src=x onerror=alert(1)>'
         with tempfile.TemporaryDirectory() as d:
-            b.publish([b.bundle(g,SOURCE,reviewed(g,SOURCE))],d);h=(Path(d)/'index.html').read_text()
+            b.publish([b.bundle(g,SOURCE,reviewed(g,SOURCE))],d);h=(Path(d)/'index.html').read_text(encoding='utf-8')
             self.assertNotIn('</script><img',h);self.assertNotIn('fetch(',h);self.assertNotIn('/*BOOKS*/',h)
     def test_excerpt_bound(self):
         g=fixture();s=copy.deepcopy(SOURCE);s['units'][0]['text']+='字'*10000
@@ -129,13 +129,13 @@ class Tests(unittest.TestCase):
     def test_old_shelf_rejected_before_writing(self):
         with tempfile.TemporaryDirectory() as d:
             base=Path(d);old=base/'old';old.mkdir();g=fixture();pack=b.bundle(g,SOURCE,reviewed(g,SOURCE));pack.pop('format_version');b.write_json(old/'books.json',[pack])
-            result=subprocess.run([sys.executable,str(ROOT/'scripts/booktool.py'),'shelf',str(old),'--out',str(base/'out')],capture_output=True,text=True)
+            result=subprocess.run([sys.executable,str(ROOT/'scripts/booktool.py'),'shelf',str(old),'--out',str(base/'out')],capture_output=True,text=True, encoding='utf-8')
             self.assertEqual(result.returncode,2);self.assertIn('重新生成',result.stderr);self.assertFalse((base/'out/index.html').exists())
     def test_render_spoiler_md_gate(self):
         with tempfile.TemporaryDirectory() as d:
             g=fixture();g['spoilers']=True;g['intro']='结局标记';g['coverage']='覆盖秘密';b.write_json(Path(d)/'g.json',g);b.write_json(Path(d)/'r.json',reviewed(g,SOURCE))
-            r=subprocess.run([sys.executable,str(ROOT/'scripts/booktool.py'),'render',str(Path(d)/'g.json'),'--source',str(ROOT/'examples/source.json'),'--review',str(Path(d)/'r.json'),'--out',d],capture_output=True,text=True)
-            self.assertEqual(r.returncode,0,r.stderr);text=(Path(d)/'guide.md').read_text();before=text.split('<details>')[0]
+            r=subprocess.run([sys.executable,str(ROOT/'scripts/booktool.py'),'render',str(Path(d)/'g.json'),'--source',str(ROOT/'examples/source.json'),'--review',str(Path(d)/'r.json'),'--out',d],capture_output=True,text=True, encoding='utf-8')
+            self.assertEqual(r.returncode,0,r.stderr);text=(Path(d)/'guide.md').read_text(encoding='utf-8');before=text.split('<details>')[0]
             self.assertNotIn('结局标记',before);self.assertNotIn('覆盖秘密',before);self.assertIn('结局标记',text)
 
 if __name__=='__main__':unittest.main()

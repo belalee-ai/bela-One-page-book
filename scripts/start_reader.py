@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Serve only the generated guide and its PDF renderer on this computer."""
-import argparse
+import argparse, sys
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -35,6 +35,8 @@ class ReaderHandler(SimpleHTTPRequestHandler):
         super().end_headers()
 
 def main():
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):stream.reconfigure(encoding="utf-8", errors="backslashreplace")
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--directory',default=str(Path(__file__).resolve().parent));p.add_argument('--port',type=int,default=8880);a=p.parse_args()
     root=Path(a.directory).resolve()
     if not (root/'index.html').is_file():p.error('目录内没有 index.html，请在生成的网页目录运行。')

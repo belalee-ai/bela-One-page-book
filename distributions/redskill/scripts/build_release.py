@@ -18,8 +18,8 @@ def build(root,name,out):
  return archive.name,hashlib.sha256(archive.read_bytes()).hexdigest(),len(paths),archive.stat().st_size
 if __name__=='__main__':
  out=BASE/'release-artifacts';out.mkdir(exist_ok=True)
- name=next(line.split(':',1)[1].strip() for line in (BASE/'SKILL.md').read_text().splitlines() if line.startswith('name:'))
+ name=next(line.split(':',1)[1].strip() for line in (BASE/'SKILL.md').read_text(encoding='utf-8').splitlines() if line.startswith('name:'))
  results=[build(BASE,name,out)]
  if (BASE/'distributions/redskill/SKILL.md').exists():results.append(build(BASE/'distributions/redskill','bela-one-page-book-redskill',out))
- (out/'SHA256.txt').write_text(''.join(f'{h}  {name}\n' for name,h,_,_ in results))
+ (out/'SHA256.txt').write_text(''.join(f'{h}  {name}\n' for name,h,_,_ in results), encoding='utf-8')
  for row in results:print(row)
