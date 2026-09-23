@@ -107,7 +107,7 @@ MOBI 先尝试直接提取，无法解码时才需要 Calibre；扫描书需要�
 
 ### 哪些已经测试
 
-0.2 的 Windows、macOS、Linux 自动检查已通过。0.3 已在 macOS 内置 Chromium 实测原创 TXT 阅读、划线、摘录联动和刷新后恢复；真实 EPUB/MOBI 本地提取也已验证。其他浏览器、手机和平板仍待实测，0.3 三系统 CI 以本次提交的运行结果为准。GitHub 原型截图不能代替便携版验收。详见 [测试结果](TESTING.md)。
+0.2 的 Windows、macOS、Linux 自动检查已通过。0.3 已在 macOS 内置 Chromium 实测原创 TXT 阅读、划线、摘录联动和刷新后恢复；真实 EPUB/MOBI 本地提取也已验证。其他浏览器、手机和平板仍待实测；[0.3 三系统自动检查](https://github.com/belalee-ai/bela-One-page-book/actions/runs/35870840579) 已通过。GitHub 原型截图不能代替便携版验收。详见 [测试结果](TESTING.md)。
 
 ## 遇到问题怎么办
 

@@ -10,9 +10,10 @@
 - 用原创 TXT 生成导览和阅读网页，在 macOS 内置 Chromium 实际添加原书、打开正文、选中文字划线、回到导览看到摘录，刷新后摘录仍在。
 - 两本用户本机书籍用于**本地提取验证**：一份 MOBI 提取 21 个单元，一份 EPUB 提取 117 个单元。仅检查提取数量，原书正文未加入仓库或发行包。未在公开分享版的浏览器里逐页验收这两本书。
 - 0.2 的 PDF 阅读、标注和恢复检查仍保留；本轮未重复所有 PDF 浏览器路径。
+- 本次公开提交的 [GitHub Actions](https://github.com/belalee-ai/bela-One-page-book/actions/runs/35870840579) 在 macOS、Windows、Linux 全部通过自动检查。这验证脚本、示例生成和依赖审计，不等于三系统浏览器交互均已实测。
 
 ## 仍待验证
 
-Windows、Linux 的本轮 CI、桌面 Chrome/Edge/Safari 的完整交互、手机触屏、Calibre 兜底转换、扫描 OCR、更多真实厚书的逐章出处核对。自动提取成功不等于导览内容已经可靠，需要继续按 Skill 的阅读和核对流程完成。
+Windows、Linux 的实际桌面浏览器交互、桌面 Chrome/Edge/Safari 的完整交互、手机触屏、Calibre 兜底转换、扫描 OCR、更多真实厚书的逐章出处核对。自动提取成功不等于导览内容已经可靠，需要继续按 Skill 的阅读和核对流程完成。
 
 [原书标注操作](pdf-annotations.md) · [完整测试历史](../TESTING.md)
