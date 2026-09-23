@@ -1,6 +1,7 @@
 /* These colors apply to annotations, leaving the PDF's white page untouched. */
 :root{--mark-fill:#efd66c66;--mark-line:#ad7524}html[data-theme="matisse"]{--mark-fill:#ffe23d70;--mark-line:#ec4f83}html[data-theme="morandi"]{--mark-fill:#a9bea766;--mark-line:#596f65}html[data-theme="vintage"]{--mark-fill:#e2b86c66;--mark-line:#9b643b}html[data-theme="swiss"]{--mark-fill:#f2b5a666;--mark-line:#b42c23}html[data-theme="night"]{--mark-fill:#e7bf6466;--mark-line:#936315}
 .annotation-layer{position:absolute;inset:0;pointer-events:none;z-index:2}.annotation-mark{position:absolute;pointer-events:none;border-radius:2px}.annotation-mark.highlight{background:var(--mark-fill);mix-blend-mode:multiply}.annotation-mark.underline{border-bottom:2px solid var(--mark-line);box-sizing:border-box}
+.ebook-text-page{position:relative}.ebook-text-page .annotation-layer{z-index:1}.ebook-text-page .annotation-mark.highlight{mix-blend-mode:multiply}
 #pdf-reader .annotation-selection{position:absolute;z-index:6;display:flex;gap:4px;padding:5px;background:var(--paper);border:1px solid var(--line);border-radius:10px;box-shadow:0 4px 18px #0002;max-width:calc(100% - 16px)}
 #pdf-reader .annotation-selection[hidden],#pdf-reader .annotation-panel[hidden]{display:none}
 #pdf-reader .annotation-panel{position:absolute;z-index:5;right:12px;top:145px;bottom:12px;width:min(340px,calc(100% - 24px));box-sizing:border-box;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 6px 28px #0002;overflow:auto;overscroll-behavior:contain}

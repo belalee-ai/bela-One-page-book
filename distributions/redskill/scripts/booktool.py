@@ -5,6 +5,7 @@ from pathlib import Path, PurePosixPath
 from html.parser import HTMLParser
 from xml.etree import ElementTree as ET
 from urllib.parse import unquote
+from ebook_import import parse_book, converter
 
 BASE = Path(__file__).resolve().parent.parent
 MAX_FILE = 256 * 1024 * 1024
@@ -61,20 +62,11 @@ def extract_one(path, out):
     if path.stat().st_size > MAX_FILE: raise ValueError('文件超过 256 MB，请分卷处理。')
     file_hash=hashlib.sha256(path.read_bytes()).hexdigest(); digest=file_hash[:24]
     ext=path.suffix.lower(); warnings=[]; title=path.stem
-    if ext in ('.txt','.md','.markdown'):
-        try: raw=path.read_text(encoding='utf-8-sig')
-        except UnicodeDecodeError: raw=path.read_text(encoding='gb18030')
-        units=[(f'文本片段 {i//6000+1}',raw[i:i+6000]) for i in range(0,len(raw),6000)]
-    elif ext=='.epub': title,units=epub_text(path)
-    elif ext=='.mobi':
-        tool=shutil.which('ebook-convert')
-        if not tool: raise ValueError('缺少 MOBI 转换工具。请安装 Calibre 并使 ebook-convert 可用，或提供 EPUB。')
-        with tempfile.TemporaryDirectory() as temp:
-            converted=Path(temp)/'converted.epub'
-            result=subprocess.run([tool,str(path.resolve()),str(converted)],capture_output=True,timeout=180)
-            if result.returncode: raise ValueError('MOBI 转换失败，请检查文件是否加密或损坏，或提供 EPUB。')
-            title,units=epub_text(converted)
-        warnings.append('来源为 MOBI 转换后的 EPUB 文档位置。')
+    if ext in ('.txt','.md','.markdown','.epub','.mobi'):
+        parsed=parse_book(path.read_bytes(),ext[1:])
+        title=parsed['title'] or path.stem
+        units=[(u['title'],u['text']) for u in parsed['units']]
+        warnings.extend(parsed['warnings'])
     elif ext=='.pdf':
         if importlib.util.find_spec('pymupdf'):
             import pymupdf
@@ -253,6 +245,7 @@ def publish(books,out):
     page=page.replace('</html>','<style>'+styles+'</style>'+(reader/'dialog.html').read_text(encoding='utf-8')+scripts+'</html>')
     if any(book.get('source_format')=='pdf' for book in books):shutil.copytree(reader/'pdfjs',out/'reader/pdfjs',dirs_exist_ok=True)
     shutil.copy2(BASE/'scripts/start_reader.py',out/'start_reader.py')
+    shutil.copy2(BASE/'scripts/ebook_import.py',out/'ebook_import.py')
     (out/'index.html').write_text(page,encoding='utf-8')
     write_json(out/'books.json',books)
 
@@ -272,7 +265,7 @@ def main():
     args=p.parse_args()
     try:
         if args.cmd=='preflight':
-            print(json.dumps({'os':platform.system(),'python':platform.python_version(),'python_ok':sys.version_info>=(3,9),'text_epub':True,'pdf':bool(importlib.util.find_spec('pymupdf') or importlib.util.find_spec('pypdf') or shutil.which('pdftotext')),'mobi':bool(shutil.which('ebook-convert')),'ocr':'not bundled','model_browser':'check host tools separately'},ensure_ascii=False,indent=2))
+            print(json.dumps({'os':platform.system(),'python':platform.python_version(),'python_ok':sys.version_info>=(3,9),'text_epub':True,'pdf':bool(importlib.util.find_spec('pymupdf') or importlib.util.find_spec('pypdf') or shutil.which('pdftotext')),'mobi_direct':True,'mobi_fallback_calibre':bool(converter()),'ocr':'not bundled','model_browser':'check host tools separately'},ensure_ascii=False,indent=2))
         elif args.cmd=='extract':
             failed=False
             for f in args.files:

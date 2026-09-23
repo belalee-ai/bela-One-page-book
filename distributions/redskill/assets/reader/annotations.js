@@ -1,4 +1,4 @@
-// Local PDF annotations. No framework, network service, or modification of the original file.
+// Local PDF and text-book annotations. No network service or modification of the original file.
 window.readingAnnotations=(()=>{
  'use strict';
  const DB='bela-pdf-annotations-v1',LIMIT=10000;let connection;
@@ -9,11 +9,13 @@ window.readingAnnotations=(()=>{
  function validate(rows){
   if(!Array.isArray(rows)||rows.length>LIMIT)throw Error('标注数量不正确');const seen=new Set();
   return rows.map(m=>{
-   if(!m||typeof m.id!=='string'||!/^[a-z0-9-]{1,80}$/i.test(m.id)||seen.has(m.id)||typeof m.bookId!=='string'||!(/^(pdf:[a-f0-9]{64}|isbn:9787521741124)$/.test(m.bookId))||typeof m.fingerprint!=='string'||!/^[a-f0-9]{64}$/.test(m.fingerprint))throw Error('标注身份不正确');seen.add(m.id);
+   if(!m||typeof m.id!=='string'||!/^[a-z0-9-]{1,80}$/i.test(m.id)||seen.has(m.id)||typeof m.bookId!=='string'||!(/^(pdf:[a-f0-9]{64}|text:[a-f0-9]{64}|epub:[a-f0-9]{64}|isbn:9787521741124)$/.test(m.bookId))||typeof m.fingerprint!=='string'||!/^[a-f0-9]{64}$/.test(m.fingerprint))throw Error('标注身份不正确');seen.add(m.id);
    if(!Number.isInteger(m.page)||m.page<1||m.page>100000||!['highlight','underline'].includes(m.style)||typeof m.text!=='string'||!m.text.trim()||m.text.length>8000||typeof m.note!=='string'||m.note.length>6000||typeof m.deleted!=='boolean'||![m.createdAt,m.updatedAt].every(v=>Number.isSafeInteger(v)&&v>0&&v<=8640000000000000))throw Error('标注内容不正确');
-   if((m.bookId.startsWith('pdf:')&&m.bookId!=='pdf:'+m.fingerprint)||m.updatedAt<m.createdAt)throw Error('标注身份或日期不一致');
-   if(!Array.isArray(m.rects)||!m.rects.length||m.rects.length>250||m.rects.some(r=>!Array.isArray(r)||r.length!==4||r.some(v=>!Number.isFinite(v)||Math.abs(v)>100000)||r[0]===r[2]||r[1]===r[3]))throw Error('标注位置不正确');
-   return {id:m.id,bookId:m.bookId,fingerprint:m.fingerprint,page:m.page,style:m.style,text:m.text,note:m.note,deleted:m.deleted,createdAt:m.createdAt,updatedAt:m.updatedAt,rects:m.rects.map(r=>r.slice())};
+   const isText=m.bookId.startsWith('text:')||m.bookId.startsWith('epub:');
+   if(((m.bookId.startsWith('pdf:')||isText)&&m.bookId.split(':')[1]!==m.fingerprint)||m.updatedAt<m.createdAt)throw Error('标注身份或日期不一致');
+   if(isText){if(!Number.isInteger(m.start)||!Number.isInteger(m.end)||m.start<0||m.end<=m.start||m.end>2000000||!Array.isArray(m.rects)||m.rects.length)throw Error('标注位置不正确')}
+   else if(!Array.isArray(m.rects)||!m.rects.length||m.rects.length>250||m.rects.some(r=>!Array.isArray(r)||r.length!==4||r.some(v=>!Number.isFinite(v)||Math.abs(v)>100000)||r[0]===r[2]||r[1]===r[3]))throw Error('标注位置不正确');
+   return {id:m.id,bookId:m.bookId,fingerprint:m.fingerprint,page:m.page,style:m.style,text:m.text,note:m.note,deleted:m.deleted,createdAt:m.createdAt,updatedAt:m.updatedAt,rects:m.rects.map(r=>r.slice()),...(isText?{start:m.start,end:m.end}:{})};
   });
  }
  async function all(){const db=await database();return new Promise((resolve,reject)=>{const r=db.transaction('marks').objectStore('marks').getAll();r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
@@ -28,7 +30,7 @@ window.readingAnnotations=(()=>{
  const annotationDate=new Intl.DateTimeFormat('zh-CN',{year:'numeric',month:'long',day:'numeric'});
  function createdTime(mark){const date=new Date(mark.createdAt),time=element('time','annotation-muted annotation-created','标注于 '+annotationDate.format(date));time.dateTime=date.toISOString();return time}
  function excerptSection(bookId,after,urlFor){
-  if(!after||!bookId.startsWith('pdf:')&&bookId!=='isbn:9787521741124')return;
+  if(!after||!bookId.startsWith('pdf:')&&!bookId.startsWith('text:')&&!bookId.startsWith('epub:')&&bookId!=='isbn:9787521741124')return;
   const section=element('section','personal-excerpts');section.id='my-excerpts';
   const heading=element('h2','','我的摘录与笔记'),hint=element('p','annotation-muted'),content=element('div','excerpt-cards');
   let expanded=false,version=0,foldAnimation;const lifecycle=new AbortController();
@@ -45,7 +47,7 @@ window.readingAnnotations=(()=>{
     content.replaceChildren();
     for(const m of marks.slice(0,expanded?marks.length:4)){
      const card=element('article','excerpt-card');
-     card.append(element('small','annotation-muted','PDF 第 '+m.page+' 页 · '+(m.style==='underline'?'划线':'重点')),element('blockquote','',m.text));
+     card.append(element('small','annotation-muted',((m.bookId.startsWith('text:')||m.bookId.startsWith('epub:'))?'原书第 '+m.page+' 节':'PDF 第 '+m.page+' 页')+' · '+(m.style==='underline'?'划线':'重点')),element('blockquote','',m.text));
      if(m.note){const note=element('details','excerpt-note');note.append(element('summary','','我的笔记'),element('p','',m.note));card.append(note)}
      const a=element('a','excerpt-source','回到原文');a.href=urlFor(m);a.dataset.annotation=m.id;card.append(createdTime(m),a);content.append(card);
     }
@@ -78,21 +80,22 @@ window.readingAnnotations=(()=>{
   const entry=button('本书标注',async()=>{if(await flush()){editor=null;visible(panel,true);await refresh();showList()}});entry.id='pdf-marks';view.querySelector('.pdf-top').insertBefore(entry,view.querySelector('#pdf-finish'));
   function tell(text,error=false){status.textContent=text;status.dataset.error=String(error)}
   function showPanel(){visible(panel,true);visible(toolbar,false)}
-  function showList(){if(editor)return;body.replaceChildren();if(!current){body.append(element('p','','请先打开原书'));return}const valid=marks.filter(m=>m.fingerprint===current.fingerprint);body.append(element('p','annotation-muted',valid.length?'共 '+valid.length+' 条，按原书页序排列。':'选中文字后，可以划线、标重点或写笔记。扫描页需先识别文字。'));if(marks.length>valid.length)body.append(element('p','annotation-muted','另一版本的标注已保留，未绘制在这份 PDF 上。'));for(const m of valid){const row=element('article','annotation-row');row.append(button('第 '+m.page+' 页 · '+(m.style==='underline'?'划线':'重点'),async()=>{if(!await flush())return;pendingId=m.id;await goPage(m.page);openEditor(m.id)}),element('p','annotation-quote',m.text));if(m.note)row.append(element('p','annotation-muted',m.note));row.append(createdTime(m));body.append(row)}}
+  function showList(){if(editor)return;body.replaceChildren();if(!current){body.append(element('p','','请先打开原书'));return}const valid=marks.filter(m=>m.fingerprint===current.fingerprint);body.append(element('p','annotation-muted',valid.length?'共 '+valid.length+' 条，按原书顺序排列。':'选中文字后，可以划线、标重点或写笔记。'));if(marks.length>valid.length)body.append(element('p','annotation-muted','另一版本的标注已保留，未绘制在这份原书上。'));for(const m of valid){const row=element('article','annotation-row');row.append(button('第 '+m.page+(current.text?' 节':' 页')+' · '+(m.style==='underline'?'划线':'重点'),async()=>{if(!await flush())return;pendingId=m.id;await goPage(m.page);openEditor(m.id)}),element('p','annotation-quote',m.text));if(m.note)row.append(element('p','annotation-muted',m.note));row.append(createdTime(m));body.append(row)}}
   function saveDraft(){clearTimeout(saveTimer);if(!editor||draft===editor.note)return queue;const id=editor.id,note=draft;tell('保存中…');queue=queue.catch(()=>{}).then(()=>update(id,{note})).then(saved=>{if(editor?.id===id){editor=saved;tell(draft===note?'已保存到此浏览器':'保存中…')}return true}).catch(()=>{tell('尚未保存，请重试；不要关闭页面。',true);return false});return queue}
   async function flush(){await saveDraft();await queue;return !editor||draft===editor.note}
   function openEditor(id){const m=marks.find(m=>m.id===id&&!m.deleted);if(!m)return;editor=m;draft=m.note;showPanel();body.replaceChildren();const text=element('textarea','annotation-note');text.maxLength=6000;text.value=draft;text.setAttribute('aria-label','这段摘录的笔记');text.placeholder='记下你此刻的想法…';text.oninput=()=>{draft=text.value;tell('保存中…');clearTimeout(saveTimer);saveTimer=setTimeout(saveDraft,450)};text.onblur=saveDraft;
    const actions=element('div','annotation-actions');for(const [style,label] of [['underline','划线'],['highlight','重点']]){const b=button(label,async()=>{if(!await flush())return;try{editor=await update(id,{style});await refresh();openEditor(id)}catch{tell('样式未保存，请重试。',true)}});b.setAttribute('aria-pressed',String(m.style===style));actions.append(b)}
    actions.append(button('移除标注',async()=>{if(!await flush())return;try{undo=await update(id,{deleted:true});editor=null;await refresh();showList();tell('已移除标注');const restore=button('撤销移除',async()=>{try{await update(undo.id,{deleted:false});undo=null;restore.remove();tell('标注已恢复');await refresh()}catch{tell('恢复失败，请重试。',true)}});body.prepend(restore)}catch{tell('移除未保存，请重试。',true)}}));
-   const retry=button('重试保存',saveDraft);retry.className='annotation-retry';body.append(button('全部标注',async()=>{if(await flush()){editor=null;showList()}}),element('p','annotation-muted','PDF 第 '+m.page+' 页'),createdTime(m),element('blockquote','annotation-quote',m.text),text,actions,button('完成',async()=>{if(await flush()){visible(panel,false);editor=null;entry.focus({preventScroll:true})}}),retry);tell('已保存到此浏览器');
+   const retry=button('重试保存',saveDraft);retry.className='annotation-retry';body.append(button('全部标注',async()=>{if(await flush()){editor=null;showList()}}),element('p','annotation-muted',((m.bookId.startsWith('text:')||m.bookId.startsWith('epub:'))?'原书第 '+m.page+' 节':'PDF 第 '+m.page+' 页')),createdTime(m),element('blockquote','annotation-quote',m.text),text,actions,button('完成',async()=>{if(await flush()){visible(panel,false);editor=null;entry.focus({preventScroll:true})}}),retry);tell('已保存到此浏览器');
   }
-  async function create(style,withNote=false){const target=selected;if(!target||!current||target.token!==current.token)return;visible(toolbar,false);try{if(!await flush())return;const time=Date.now();const same=marks.find(m=>!m.deleted&&m.bookId===target.bookId&&m.fingerprint===target.fingerprint&&m.page===target.page&&m.text===target.text&&JSON.stringify(m.rects)===JSON.stringify(target.rects));const mark=same||await put({id:crypto.randomUUID(),bookId:target.bookId,fingerprint:target.fingerprint,page:target.page,text:target.text,rects:target.rects,note:'',style,deleted:false,createdAt:time,updatedAt:time});getSelection()?.removeAllRanges();selected=null;await refresh();if(withNote){openEditor(mark.id);body.querySelector('textarea')?.focus()}else{tell('已保存到此浏览器');entry.textContent='本书标注 · 已保存';setTimeout(()=>entry.textContent='本书标注',1800)}}catch{showPanel();tell('标注尚未保存，请检查浏览器存储后重试。',true);body.replaceChildren(element('p','annotation-quote',target.text),button('重试保存',()=>create(style,withNote)))}}
+  async function create(style,withNote=false){const target=selected;if(!target||!current||target.token!==current.token)return;visible(toolbar,false);try{if(!await flush())return;const time=Date.now();const same=marks.find(m=>!m.deleted&&m.bookId===target.bookId&&m.fingerprint===target.fingerprint&&m.page===target.page&&m.text===target.text&&(target.start!=null?m.start===target.start&&m.end===target.end:JSON.stringify(m.rects)===JSON.stringify(target.rects)));const mark=same||await put({id:crypto.randomUUID(),bookId:target.bookId,fingerprint:target.fingerprint,page:target.page,text:target.text,rects:target.rects,...(target.start!=null?{start:target.start,end:target.end}:{}),note:'',style,deleted:false,createdAt:time,updatedAt:time});getSelection()?.removeAllRanges();selected=null;await refresh();if(withNote){openEditor(mark.id);body.querySelector('textarea')?.focus()}else{tell('已保存到此浏览器');entry.textContent='本书标注 · 已保存';setTimeout(()=>entry.textContent='本书标注',1800)}}catch{showPanel();tell('标注尚未保存，请检查浏览器存储后重试。',true);body.replaceChildren(element('p','annotation-quote',target.text),button('重试保存',()=>create(style,withNote)))}}
   toolbar.append(button('划线',()=>create('underline')),button('重点',()=>create('highlight')),button('笔记',()=>create('highlight',true)));
   toolbar.addEventListener('pointerdown',e=>e.preventDefault());
   function selection(){
-   selected=null;if(!current){visible(toolbar,false);return}const sel=getSelection();if(!sel||sel.isCollapsed||!sel.rangeCount){visible(toolbar,false);return}const range=sel.getRangeAt(0),layer=current.holder.querySelector('.textLayer');if(!layer.contains(range.startContainer)||!layer.contains(range.endContainer)){visible(toolbar,false);return}const text=sel.toString().trim();if(!text||text.length>8000){visible(toolbar,false);return}const box=current.holder.getBoundingClientRect(),raw=[...range.getClientRects()].filter(r=>r.width>1&&r.height>1&&r.right>box.left&&r.left<box.right&&r.bottom>box.top&&r.top<box.bottom);const rects=[];
-   for(const r of raw){const a=current.viewport.convertToPdfPoint(Math.max(0,r.left-box.left),Math.max(0,r.top-box.top)),b=current.viewport.convertToPdfPoint(Math.min(box.width,r.right-box.left),Math.min(box.height,r.bottom-box.top));const v=[...a,...b].map(n=>Math.round(n*1000)/1000);if(!rects.some(x=>x.every((n,i)=>Math.abs(n-v[i])<.1)))rects.push(v)}if(!rects.length||rects.length>250){visible(toolbar,false);return}
-   selected={bookId:current.bookId,fingerprint:current.fingerprint,page:current.page,token:current.token,text,rects};visible(toolbar,true);const r=range.getBoundingClientRect(),v=view.getBoundingClientRect();toolbar.style.left=Math.max(8,Math.min(r.left-v.left,view.clientWidth-toolbar.offsetWidth-8))+'px';const top=r.top-v.top-toolbar.offsetHeight-8;toolbar.style.top=Math.max(8,Math.min(top>110?top:r.bottom-v.top+8,view.clientHeight-toolbar.offsetHeight-8))+'px';
+   selected=null;if(!current){visible(toolbar,false);return}const sel=getSelection();if(!sel||sel.isCollapsed||!sel.rangeCount){visible(toolbar,false);return}const range=sel.getRangeAt(0),layer=current.text?current.body:current.holder.querySelector('.textLayer');if(!layer?.contains(range.startContainer)||!layer.contains(range.endContainer)){visible(toolbar,false);return}const text=sel.toString().trim();if(!text||text.length>8000){visible(toolbar,false);return}const box=current.holder.getBoundingClientRect(),raw=[...range.getClientRects()].filter(r=>r.width>1&&r.height>1&&r.right>box.left&&r.left<box.right&&r.bottom>box.top&&r.top<box.bottom);const rects=[];
+   if(current.text){if(range.startContainer!==current.body.firstChild||range.endContainer!==current.body.firstChild){visible(toolbar,false);return}selected={bookId:current.bookId,fingerprint:current.fingerprint,page:current.page,token:current.token,text,rects:[],start:range.startOffset,end:range.endOffset}}
+   else{for(const r of raw){const a=current.viewport.convertToPdfPoint(Math.max(0,r.left-box.left),Math.max(0,r.top-box.top)),b=current.viewport.convertToPdfPoint(Math.min(box.width,r.right-box.left),Math.min(box.height,r.bottom-box.top));const v=[...a,...b].map(n=>Math.round(n*1000)/1000);if(!rects.some(x=>x.every((n,i)=>Math.abs(n-v[i])<.1)))rects.push(v)}selected={bookId:current.bookId,fingerprint:current.fingerprint,page:current.page,token:current.token,text,rects}}
+   if(!raw.length||raw.length>250||!current.text&&!rects.length){visible(toolbar,false);return}visible(toolbar,true);const r=range.getBoundingClientRect(),v=view.getBoundingClientRect();toolbar.style.left=Math.max(8,Math.min(r.left-v.left,view.clientWidth-toolbar.offsetWidth-8))+'px';const top=r.top-v.top-toolbar.offsetHeight-8;toolbar.style.top=Math.max(8,Math.min(top>110?top:r.bottom-v.top+8,view.clientHeight-toolbar.offsetHeight-8))+'px';
   }
   paper.addEventListener('pointerup',async e=>{selection();if(getSelection()?.isCollapsed&&current){const hit=[...current.holder.querySelectorAll('.annotation-mark')].find(el=>{const r=el.getBoundingClientRect();return e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom+5});if(hit&&!hit.dataset.retiring&&await flush())openEditor(hit.dataset.id)}});
   paper.addEventListener('keyup',selection);document.addEventListener('selectionchange',()=>{if(view.open&&current)selection()});stage.addEventListener('scroll',()=>{visible(toolbar,false)});
@@ -100,20 +103,25 @@ window.readingAnnotations=(()=>{
    if(!current)return;let layer=current.holder.querySelector('.annotation-layer');const restoring=!layer;
    if(!layer){layer=element('div','annotation-layer');layer.setAttribute('aria-hidden','true');current.holder.append(layer)}
    const remaining=new Map([...layer.children].map(el=>[el.dataset.key,el]));
-   for(const m of marks.filter(m=>m.page===current.page&&m.fingerprint===current.fingerprint))m.rects.forEach((rect,i)=>{
-    const key=m.id+':'+i,[x1,y1,x2,y2]=[...current.viewport.convertToViewportPoint(rect[0],rect[1]),...current.viewport.convertToViewportPoint(rect[2],rect[3])];let el=remaining.get(key),fresh=!el;
+   for(const m of marks.filter(m=>m.page===current.page&&m.fingerprint===current.fingerprint)){
+    let boxes;
+    if(current.text){const node=current.body.firstChild;if(!node||m.end>node.length||node.textContent.slice(m.start,m.end).trim()!==m.text)continue;const range=document.createRange();range.setStart(node,m.start);range.setEnd(node,m.end);const origin=current.holder.getBoundingClientRect();boxes=[...range.getClientRects()].filter(r=>r.width>1&&r.height>1).map(r=>[r.left-origin.left,r.top-origin.top,r.right-origin.left,r.bottom-origin.top]);range.detach?.()}
+    else boxes=m.rects.map(rect=>[...current.viewport.convertToViewportPoint(rect[0],rect[1]),...current.viewport.convertToViewportPoint(rect[2],rect[3])]);
+    boxes.forEach((rect,i)=>{
+    const key=m.id+':'+i,[x1,y1,x2,y2]=rect;let el=remaining.get(key),fresh=!el;
     if(!el){el=element('span','annotation-mark '+m.style);el.dataset.key=key;el.dataset.id=m.id;layer.append(el)}
     remaining.delete(key);el.className='annotation-mark '+m.style;
     Object.assign(el.style,{left:Math.min(x1,x2)+'px',top:Math.min(y1,y2)+'px',width:Math.abs(x2-x1)+'px',height:Math.abs(y2-y1)+'px'});
     if(fresh&&!restoring){el.style.opacity='0';markMotion(el,true)}else if(el.dataset.retiring){delete el.dataset.retiring;markMotion(el,true)}
-   });
+    });
+   }
    for(const el of remaining.values())if(!el.dataset.retiring){el.dataset.retiring='true';markMotion(el,false)}
    if(pendingId){const el=[...layer.children].find(el=>el.dataset.id===pendingId&&!el.dataset.retiring);if(el){el.scrollIntoView({block:'center',inline:'nearest',behavior:'instant'});if(!reducedMotion.matches)el.animate([{opacity:.65},{opacity:1}],{duration:320,easing:'ease-out'});pendingId=null}}
   }
-  async function refresh(){if(!current)return;const token=++drawVersion,bookId=current.bookId;try{const rows=await list(bookId);if(token!==drawVersion||current?.bookId!==bookId)return;marks=rows;draw();if(!panel.hidden&&!editor)showList()}catch(error){console.error('Annotation refresh failed',error);showPanel();tell('无法读取标注，原有数据未被覆盖。',true)}}
+  async function refresh(){if(!current)return;const token=++drawVersion,bookId=current.bookId;try{const rows=await list(bookId);if(token!==drawVersion||current?.bookId!==bookId)return;marks=rows;draw();if(!panel.hidden&&!editor)showList()}catch{showPanel();tell('无法读取标注，原有数据未被覆盖。',true)}}
   window.addEventListener('annotations-changed',refresh);window.addEventListener('focus',()=>{if(view.open)refresh()});
   window.addEventListener('beforeunload',e=>{if(editor&&draft!==editor.note){saveDraft();e.preventDefault();e.returnValue=''}});
-  return {flush,async attach(context){current={...context,token:Symbol()};selected=null;visible(toolbar,false);await refresh()},invalidate(){current=null;selected=null;visible(toolbar,false);++drawVersion},async reset(){if(!await flush())return false;editor=null;pendingId=null;visible(panel,false);this.invalidate();return true},focus(id){pendingId=id},openNote:openEditor};
+  return {flush,async attach(context){current={...context,token:Symbol()};selected=null;visible(toolbar,false);await refresh()},invalidate(){current=null;selected=null;visible(toolbar,false);++drawVersion},redraw:draw,async reset(){if(!await flush())return false;editor=null;pendingId=null;visible(panel,false);this.invalidate();return true},focus(id){pendingId=id},openNote:openEditor};
  }
  return {all,list,put,update,validate,merge,excerptSection,reader};
 })();

@@ -11,7 +11,7 @@ def build(root,name,out):
  for folder in DIRS:
   if (root/folder).exists():paths.extend(p for p in (root/folder).rglob('*') if p.is_file() and not p.is_symlink() and '__pycache__' not in p.parts and 'node_modules' not in p.parts and p.suffix!='.pyc' and p.name!='.DS_Store')
  entries={p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(paths)}
- archive=out/(name+'-0.2.zip')
+ archive=out/(name+'-0.3.zip')
  with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
   for p in paths:z.write(p,name+'/'+p.relative_to(root).as_posix())
   z.writestr(name+'/MANIFEST.json',json.dumps(entries,ensure_ascii=False,indent=2))

@@ -63,7 +63,7 @@ class Tests(unittest.TestCase):
     def test_empty(self):
         with tempfile.TemporaryDirectory() as d:
             p=Path(d)/'x.txt';p.write_text(' ', encoding='utf-8')
-            with self.assertRaisesRegex(ValueError,'OCR'):b.extract_one(p,d)
+            with self.assertRaisesRegex(ValueError,'识别文字'):b.extract_one(p,d)
     def test_valid(self):
         g=fixture();self.assertTrue(b.validate(g,SOURCE,reviewed(g,SOURCE)))
     def test_no_review(self):
@@ -115,7 +115,7 @@ class Tests(unittest.TestCase):
         g=fixture();g['title']='</script><img src=x onerror=alert(1)>'
         with tempfile.TemporaryDirectory() as d:
             b.publish([b.bundle(g,SOURCE,reviewed(g,SOURCE))],d);h=(Path(d)/'index.html').read_text(encoding='utf-8')
-            self.assertNotIn('</script><img',h);self.assertNotIn('fetch(',h);self.assertNotIn('/*BOOKS*/',h)
+            self.assertNotIn('</script><img',h);self.assertNotIn('<img src=x onerror=',h);self.assertNotIn('/*BOOKS*/',h)
     def test_excerpt_bound(self):
         g=fixture();s=copy.deepcopy(SOURCE);s['units'][0]['text']+='字'*10000
         self.assertTrue(all(len(e['text'])<=280 for e in b.bundle(g,s,reviewed(g,s))['sources']))

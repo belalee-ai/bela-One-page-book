@@ -72,13 +72,13 @@ Claude Code、Cursor、Codex 的命令按 Skills CLI 支持列表核对。WorkBu
 
 成功的检查结果应包括：能找到 `SKILL.md`、`scripts`、`assets`、`references`，并实际产出示例网页。只有识别到名字，还不代表文件和运行环境都齐全。
 
-随后在对话里上传 PDF、EPUB、TXT 或 MD，或者提供助手可以访问的本地路径：
+随后在对话里上传 PDF、EPUB、MOBI、TXT 或 MD，或者提供助手可以访问的本地路径：
 
 ```text
 使用 bela-one-page-book，帮我整理这本书。想先看梗概和脑图，再挑章节读原书。网页先用莫兰迪风格。
 ```
 
-MOBI 需要 Calibre，扫描书需要额外文字识别；不必提前装齐所有可选工具。继续看 [详细使用方法](docs/usage.md)。
+MOBI 先尝试直接提取，无法解码时才需要 Calibre；扫描书需要额外文字识别；不必提前装齐所有可选工具。继续看 [详细使用方法](docs/usage.md)。
 
 ## 用什么系统和浏览器
 
@@ -107,7 +107,7 @@ MOBI 需要 Calibre，扫描书需要额外文字识别；不必提前装齐所�
 
 ### 哪些已经测试
 
-0.1 的 Windows、macOS、Linux 生成脚本自动检查已通过。0.2 已在 macOS 内置 Chromium 实测 PDF 阅读、标注、恢复与备份导入；其他浏览器、手机和平板仍待实测，本轮三系统 CI 以对应提交为准。GitHub 展示图来自原型页面，不能代替便携版验收。详见 [测试结果](TESTING.md)。
+0.2 的 Windows、macOS、Linux 自动检查已通过。0.3 已在 macOS 内置 Chromium 实测原创 TXT 阅读、划线、摘录联动和刷新后恢复；真实 EPUB/MOBI 本地提取也已验证。其他浏览器、手机和平板仍待实测，0.3 三系统 CI 以本次提交的运行结果为准。GitHub 原型截图不能代替便携版验收。详见 [测试结果](TESTING.md)。
 
 ## 遇到问题怎么办
 
@@ -167,6 +167,6 @@ skills/
 
 已核对仓库根目录的 Skill 结构，以及安装工具文档中的命令与工具标识。三系统的生成脚本检查见 [测试说明](TESTING.md)。本轮在独立目录解包检查发行包，作者本机 Codex Skill 也同步更新；这不等于已经完成 Claude Code、Cursor 或 WorkBuddy 的客户端加载与完整生成实测。
 
-## 0.2 的 PDF 标注与升级
+## 0.3 的原书标注与升级
 
-安装完整 Skill 后，让助手重新生成交付目录。文字导览仍可双击 HTML；想在 PDF 上划线，在交付目录运行 `python start_reader.py`（Windows 也可用 `py -3 start_reader.py`），打开显示的本机地址。保留整个 `reader` 文件夹。0.1 的阅读进度 JSON 可恢复，旧 guide/source 材料需要按新核对契约重新生成。详细步骤见 [PDF 标注说明](docs/pdf-annotations.md)。
+安装完整 Skill 后，让助手重新生成交付目录。文字导览仍可双击 HTML；想在 PDF、EPUB、MOBI、TXT 或 Markdown 上划线，在交付目录运行 `python start_reader.py`（Windows 也可用 `py -3 start_reader.py`），打开显示的本机地址。保留整个 `reader` 文件夹及 `ebook_import.py`。0.1 的阅读进度 JSON 可恢复，旧 guide/source 材料需要按新核对契约重新生成。详细步骤见 [原书标注说明](docs/pdf-annotations.md)。

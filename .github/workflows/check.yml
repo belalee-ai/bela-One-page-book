@@ -22,6 +22,7 @@ jobs:
           node-version: '22'
       - run: python scripts/booktool.py preflight
       - run: python scripts/test_booktool.py
+      - run: python scripts/test_ebook_import.py
       - run: node scripts/test_state.cjs
       - run: node scripts/test_annotations.cjs
       - run: python scripts/test_reader_server.py
@@ -29,5 +30,7 @@ jobs:
       - run: python scripts/booktool.py render examples/reader/guide.json --source examples/reader/source.json --review examples/reader/review.json --out demo-reader
       - run: npm audit --prefix vendor --omit=dev --audit-level=high
       - run: python distributions/redskill/scripts/test_booktool.py
+      - run: python distributions/redskill/scripts/test_ebook_import.py
       - run: node distributions/redskill/scripts/test_state.cjs
       - run: node distributions/redskill/scripts/test_annotations.cjs
+      - run: python distributions/redskill/scripts/test_reader_server.py

@@ -27,3 +27,8 @@
 @media(max-width:680px){#pdf-zoom{order:4;font-size:12px;min-height:34px;padding-block:6px}.pdf-controls{row-gap:6px}}
 
 #pdf-reader .pdf-top{max-width:none;margin:0;width:100%;flex-wrap:wrap}#pdf-reader .pdf-top h2{flex-basis:0}#portable-pdf-tools input[hidden]{display:none}@media(max-width:680px){#pdf-reader .pdf-top h2{flex-basis:100%}}
+.ebook-text-page{position:relative;max-width:780px;margin:0 auto;padding:clamp(22px,5vw,56px);background:var(--paper);color:var(--ink);text-align:left;overflow-wrap:anywhere}
+.ebook-text-page h3{font-size:1.45rem;margin:24px 0;line-height:1.5}
+.ebook-text-body{white-space:pre-wrap;font-size:18px;line-height:2}
+.ebook-text-note{color:var(--muted);font-size:13px;line-height:1.7}
+#pdf-reader.text-book-reader #pdf-paper{width:100%;max-width:900px}
